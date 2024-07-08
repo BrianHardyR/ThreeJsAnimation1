@@ -69,6 +69,13 @@ camera.position.z = 5.15
 camera.lookAt(cube.position)
 scene.add(camera)
 
+// On page resize set new renderer size
+window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
+})
+
 // // // Ambient light
 // const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
 // scene.add(ambientLight)
