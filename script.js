@@ -1,6 +1,8 @@
-// threejs from cdn
 import * as THREE from './three.module.js'
+
+// Canvas
 const canvas = document.querySelector('canvas.webgl')
+
 // Renderer
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true })
 renderer.setSize(window.innerWidth, window.innerHeight)
@@ -18,8 +20,9 @@ scene.background = new THREE.Color(0x000000)
 // plane.position.y = -5
 // scene.add(plane)
 
+
+// Object
 function Cube3X3() {
-    const texture = new THREE.TextureLoader().load('metal.png')
     const group = new THREE.Group()
     const material = new THREE.MeshStandardMaterial({
         color: 0xff0000,
@@ -59,8 +62,6 @@ function Cube3X3() {
 }
 const cube = Cube3X3()
 scene.add(cube)
-// Object
-
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000)
@@ -93,7 +94,7 @@ scene.add(pointLightHelper)
 // scene.add(directionalLightHelper)
 
 
-
+// Render Loop
 const clock = new THREE.Clock()
 function animate() {
     const elapsedTime = clock.getElapsedTime()
