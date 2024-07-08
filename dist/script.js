@@ -1,5 +1,5 @@
-import * as THREE from 'three'
-import { color } from 'three/examples/jsm/nodes/Nodes.js'
+// threejs from cdn
+import * as THREE from '../node_modules/three/build/three.module.js'
 const canvas = document.querySelector('canvas.webgl')
 // Renderer
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true })
