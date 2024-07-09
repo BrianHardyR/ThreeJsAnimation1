@@ -81,6 +81,8 @@ button:focus-visible {
 
 canvas {
   display: block;
+  height: 100vh;
+  width: 100vw;
 }
 
 /* scene-switcher float at the bottom center */
@@ -89,11 +91,11 @@ canvas {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  padding: 1em;
+  margin: auto;
   background-color: #1a1a1a;
   border-radius: 8px 8px 0 0;
   display: flex;
-  gap: 1em;
+  z-index: 1;
 }
 
 @media (prefers-color-scheme: light) {
