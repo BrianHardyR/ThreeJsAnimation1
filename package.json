@@ -1,13 +1,17 @@
 {
-  "dependencies": {
-    "three": "^0.166.1"
-  },
-  "devDependencies": {
-    "vite": "^5.3.3"
-  },
+  "name": "threejs-fun",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview --port 8080"
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.3.1"
+  },
+  "dependencies": {
+    "three": "^0.166.1"
   }
 }

@@ -1,6 +1,12 @@
-import * as THREE from './three.module.js'
+import './style.css'
+import * as THREE from 'three'
 
-// Canvas
+document.querySelector('#app').innerHTML = `
+  <div>
+    <canvas class="webgl"></canvas>
+  </div>
+`
+
 const canvas = document.querySelector('canvas.webgl')
 
 // Renderer
