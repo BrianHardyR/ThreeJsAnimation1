@@ -1,16 +1,8 @@
 import * as THREE from 'three';
-import * as dat from 'dat.gui';
-
-// const gui = new dat.GUI();
 
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x000000)
 
-
-
-// Axes helper
-// const axesHelper = new THREE.AxesHelper(15)
-// scene.add(axesHelper)
 
 const parameters = {
     count: 300,
@@ -21,13 +13,6 @@ const parameters = {
     insideColor: '#6c3f04',
     outsideColor: '#000000'
 }
-
-// gui.add(parameters, 'radius').min(0).max(10).step(0.001)
-// gui.add(parameters, 'spin').min(10).max(1000).step(1)
-// gui.add(parameters, 'speed').min(-1).max(1).step(0.001)
-// gui.add(parameters, 'height').min(0).max(10).step(0.001)
-// gui.addColor(parameters, 'insideColor').onChange(() => setColors())
-// gui.addColor(parameters, 'outsideColor').onChange(() => setColors())
 
 const planets = []
 
@@ -110,9 +95,6 @@ scene.add(camera)
 
 function animate(elapsedTime) {
     plotParticles(elapsedTime)
-    
-    // points.geometry.attributes.position.needsUpdate = true
-    // gui.updateDisplay()
 }
 
 const SCENE = {
