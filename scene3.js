@@ -9,8 +9,8 @@ scene.background = new THREE.Color(0x000000)
 
 
 // Axes helper
-const axesHelper = new THREE.AxesHelper(15)
-scene.add(axesHelper)
+// const axesHelper = new THREE.AxesHelper(15)
+// scene.add(axesHelper)
 
 const parameters = {
     count: 300,
@@ -101,8 +101,8 @@ scene.add(bulb)
 // Camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000)
 camera.position.x = 2
-camera.position.y = 3
-camera.position.z = -1
+camera.position.y = 2.5
+camera.position.z = 1
 camera.lookAt(bulb.position)
 scene.add(camera)
 

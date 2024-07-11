@@ -20,7 +20,7 @@ document.querySelector('#app').innerHTML = `
 
 
 const canvas = document.querySelector('canvas.webgl')
-let currentScene = SCENE_1
+let currentScene = SCENE_3
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true })
