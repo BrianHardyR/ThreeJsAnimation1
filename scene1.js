@@ -6,6 +6,7 @@ const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x000000)
 
 // Hello world text
+let text = null
 const fontLoader = new FontLoader()
 fontLoader.load('./SuperCharge.json', (font)=>{
     const textGeometry = new TextGeometry("\\*.*\/", {
@@ -22,11 +23,10 @@ fontLoader.load('./SuperCharge.json', (font)=>{
     const textMaterial = new THREE.MeshMatcapMaterial({
         color: 0xdddddd
     })
-    const text = new THREE.Mesh(textGeometry, textMaterial)
+    text = new THREE.Mesh(textGeometry, textMaterial)
     textGeometry.computeBoundingBox()
     text.position.x = -textGeometry.boundingBox.max.x / 2
     text.position.y = -textGeometry.boundingBox.max.y / 2
-    text.position.z = 0
     scene.add(text)
 })
 
@@ -82,7 +82,7 @@ camera.lookAt(cube.position)
 scene.add(camera)
 
 // Point light
-const pointLight = new THREE.PointLight(0xffffff, 15, 1000, 1)
+const pointLight = new THREE.PointLight(0xffffff, 20, 1000, 1)
 pointLight.position.x = 0
 pointLight.position.y = 0
 pointLight.position.z = 0
@@ -92,16 +92,16 @@ scene.add(pointLight)
 // scene.add(pointLightHelper)
 
 // Directional light
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
-directionalLight.position.x = 5
-directionalLight.position.y = 5
-directionalLight.position.z = 5
-scene.add(directionalLight)
+// const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
+// directionalLight.position.x = 5
+// directionalLight.position.y = 5
+// directionalLight.position.z = 5
+// scene.add(directionalLight)
 
 function animate(elapsedTime) {
     cube.rotation.y = Math.sin(elapsedTime * 0.2)
     cube.rotation.x = Math.cos(elapsedTime * 0.2)
-    // sphere.rotation.y += 0.001
+    cube.rotation.z += 0.001
 }
 
 const SCENE = {
