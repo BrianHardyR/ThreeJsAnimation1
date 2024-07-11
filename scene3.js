@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import * as dat from 'dat.gui';
 
-const gui = new dat.GUI();
+// const gui = new dat.GUI();
 
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x000000)
@@ -22,12 +22,12 @@ const parameters = {
     outsideColor: '#000000'
 }
 
-gui.add(parameters, 'radius').min(0).max(10).step(0.001)
-gui.add(parameters, 'spin').min(10).max(1000).step(1)
-gui.add(parameters, 'speed').min(-1).max(1).step(0.001)
-gui.add(parameters, 'height').min(0).max(10).step(0.001)
-gui.addColor(parameters, 'insideColor').onChange(() => setColors())
-gui.addColor(parameters, 'outsideColor').onChange(() => setColors())
+// gui.add(parameters, 'radius').min(0).max(10).step(0.001)
+// gui.add(parameters, 'spin').min(10).max(1000).step(1)
+// gui.add(parameters, 'speed').min(-1).max(1).step(0.001)
+// gui.add(parameters, 'height').min(0).max(10).step(0.001)
+// gui.addColor(parameters, 'insideColor').onChange(() => setColors())
+// gui.addColor(parameters, 'outsideColor').onChange(() => setColors())
 
 const planets = []
 
@@ -106,13 +106,13 @@ camera.position.z = -1
 camera.lookAt(bulb.position)
 scene.add(camera)
 
-gui.close()
+// gui.close()
 
 function animate(elapsedTime) {
     plotParticles(elapsedTime)
     
     // points.geometry.attributes.position.needsUpdate = true
-    gui.updateDisplay()
+    // gui.updateDisplay()
 }
 
 const SCENE = {
