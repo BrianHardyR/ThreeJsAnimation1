@@ -27,7 +27,7 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100lvh;
 }
 
 h1 {
@@ -81,6 +81,7 @@ button:focus-visible {
 
 canvas {
   display: block;
+  margin: 0;
   height: 100lvh;
   width: 100vw;
 }
