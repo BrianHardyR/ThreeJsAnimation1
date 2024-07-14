@@ -1,6 +1,5 @@
 import './style.css'
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import { Scene_1 } from './scene_1.js'
 import { Scene_2 } from './scene_2.js'
 import { Scene_3 } from './scene_3.js'
