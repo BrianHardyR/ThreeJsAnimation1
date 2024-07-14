@@ -33,7 +33,7 @@ export class Scene_3 extends Scene {
 
     setupCamera() {
         super.setupCamera()
-        this.camera.position.z = 10
+        this.camera.position.z = 15
     }
 
     setupVisualizer() {
@@ -51,7 +51,7 @@ export class Scene_3 extends Scene {
 
     animate(elapsedTime) {
         this.controls.update()
-        this.uniforms.u_time.value = elapsedTime
+        this.uniforms.u_time.value = elapsedTime * 0.5
     }
 
 }
