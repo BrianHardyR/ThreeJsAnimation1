@@ -1,9 +1,9 @@
 import './style.css'
-import { SCENE as SCENE_1 } from './scene1'
-import { SCENE as SCENE_2 } from './scene2'
-import { SCENE as SCENE_3 } from './scene3'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
+import { Scene_1 } from './scene_1.js'
+import { Scene_2 } from './scene_2.js'
+import { Scene_3 } from './scene_3.js'
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -20,35 +20,37 @@ document.querySelector('#app').innerHTML = `
 
 
 const canvas = document.querySelector('canvas.webgl')
-let currentScene = SCENE_1
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true })
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.shadowMap.enabled = true
 
-let controls = null
 // Orbit controls
-updateScene(currentScene)
+let currentScene = null
 
 function updateScene(scene) {
-    controls = new OrbitControls(scene.camera, renderer.domElement)
+    if (currentScene){
+        currentScene.finalize()
+    }
     currentScene = scene
-    renderer.render(scene.scene, scene.camera)
+    renderer.render(scene.getScene(), scene.getCamera())
 }
+
+updateScene(new Scene_3(renderer))
 
 
 // Switch scenes
 document.getElementById('scene1').addEventListener('click', () => {
-    updateScene(SCENE_1)
+    updateScene(new Scene_1(renderer))
 })
 
 document.getElementById('scene2').addEventListener('click', () => {
-    updateScene(SCENE_2)
+    updateScene(new Scene_2(renderer))
 })
 
 document.getElementById('scene3').addEventListener('click', () => {
-    updateScene(SCENE_3)
+    updateScene(new Scene_3(renderer))
 })
 
 
@@ -56,10 +58,9 @@ document.getElementById('scene3').addEventListener('click', () => {
 
 // On page resize set new renderer size
 window.addEventListener('resize', () => {
-    if (!currentScene && !currentScene.camera) return
+    if (!currentScene && !currentScene.getCamera()) return
     renderer.setSize(window.innerWidth, window.innerHeight)
-    currentScene.camera.aspect = window.innerWidth / window.innerHeight
-    currentScene.camera.updateProjectionMatrix()
+    currentScene.resize(window.innerWidth, window.innerHeight)
 })
 
 
@@ -69,8 +70,7 @@ function animate() {
     if (!currentScene) return
     const elapsedTime = clock.getElapsedTime()
     currentScene.animate(elapsedTime)
-    controls.update()
-    renderer.render(currentScene.scene, currentScene.camera)
+    renderer.render(currentScene.getScene(), currentScene.getCamera())
 }
 
-renderer.setAnimationLoop(animate,);
+renderer.setAnimationLoop(animate);
