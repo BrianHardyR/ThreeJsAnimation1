@@ -106,7 +106,7 @@ canvas {
   margin: auto;
   padding-right: 10px;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 @media (prefers-color-scheme: light) {

@@ -12,8 +12,8 @@ export class Scene_3 extends Scene {
     controls
     audioControls = {
         playPauseButton: null,
-        progressBar: null
-
+        progressBar: null,
+        uploadFile: null
     }
     uniforms = {
         u_time: { type: 'f', value: 0.0 },
@@ -45,9 +45,16 @@ export class Scene_3 extends Scene {
         document.querySelector('#player').innerHTML = `
             <button id="play-pause">Play </button
             <label id="load_progress"><progress value="0" max="100">70 %</progress></label>
+            <!-- Upload File only accept mp3-->
+            <!-- <input type="file" id="file" accept="audio/mp3"> -->
         `
         this.audioControls.playPauseButton = document.querySelector('#play-pause')
         this.audioControls.progressBar = document.querySelector('progress')
+        // Upload file
+        // this.audioControls.uploadFile = document.querySelector('#file')
+        // this.audioControls.uploadFile.addEventListener('change', (e) => {
+            
+        // })
 
         this.audioControls.playPauseButton.addEventListener('click', () => {
             if (this.audio.isPlaying) {
@@ -71,22 +78,40 @@ export class Scene_3 extends Scene {
         document.querySelector('#player').innerHTML = ``
     }
 
+    loadBuffer(trackFileData) {
+        this.audio.stop()
+        this.audioControls.playPauseButton.textContent = 'Play'
+        const context = this.audio.context
+        context.decodeAudioData(trackFileData, (buffer) => {
+            this.audio.setBuffer(buffer)
+            this.audio.setLoop(true)
+            this.audio.setVolume(0.5)
+            this.audio.play()
+        })
+    }
+
+    /**
+     * 
+     * @param {string} track initial track to play
+     */
     audioSetup(track) {
-        console.log(track)
+        // console.log(track)
         const listener = new THREE.AudioListener()
         this.camera.add(listener)
         this.audio = new THREE.Audio(listener)
         const audioLoader = new THREE.AudioLoader()
+        
         audioLoader.load(
             track,
             (buffer) => {
+                // console.log(buffer)
                 this.audio.setBuffer(buffer)
                 this.audio.setLoop(true)
                 this.audio.setVolume(0.5)
-                this.audio.play()
+                // this.audio.play()
             },
             (xhr) => {
-                console.log((xhr.loaded / xhr.total * 100) + '% loaded')
+                // console.log((xhr.loaded / xhr.total * 100) + '% loaded')
                 // Update progress bar
                 if (!this.audioControls.progressBar) return
                 this.audioControls.progressBar.value = (xhr.loaded / xhr.total * 100)
@@ -146,7 +171,7 @@ export class Scene_3 extends Scene {
         const highFreq = f_data.slice(20, 30)
         const highFreqAvg = highFreq.reduce((acc, curr) => acc + curr, 0) / highFreq.length
 
-        console.log(highFreqAvg)
+    
         this.uniforms.u_frequency_low.value = lowFreqAvg
         this.uniforms.u_frequency_mid.value = midFreqAvg
         this.uniforms.u_frequency_high.value = highFreqAvg
