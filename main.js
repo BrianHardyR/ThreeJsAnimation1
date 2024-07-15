@@ -12,7 +12,9 @@ document.querySelector('#app').innerHTML = `
         <button id="scene1">Scene 1</button>
         <button id="scene2">Scene 2</button>
         <button id="scene3">Scene 3</button>
+        <div id="player"></div>
     </div>
+    
   </div>
 `
 

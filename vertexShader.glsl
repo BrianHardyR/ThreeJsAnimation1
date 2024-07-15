@@ -1,4 +1,8 @@
 uniform float u_time;
+uniform float u_mouse;
+uniform float u_frequency_low;
+uniform float u_frequency_mid;
+uniform float u_frequency_high;
 
 vec3 mod289(vec3 x)
 {
@@ -105,7 +109,7 @@ float pnoise(vec3 P, vec3 rep)
 void main() {
     // log the time
 
-    float displacement =  pnoise(position + u_time, vec3(10.0));
-    vec3 newPosition = position + normal * displacement;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, .5);
+    float displacement =  pnoise(position - u_frequency_mid * 0.1, vec3(0.1)) * ( 0.1 + (u_frequency_high * 0.01));
+    vec3 newPosition = position - (normal * displacement);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition,  .5 - (u_frequency_low * 0.0004));
 }
