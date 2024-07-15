@@ -94,6 +94,7 @@ canvas {
   border-radius: 8px 8px 0 0;
   display: flex;
   z-index: 1;
+  flex-wrap: wrap;
 }
 
 /*  */
@@ -104,6 +105,8 @@ canvas {
   align-items: center;
   margin: auto;
   padding-right: 10px;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 @media (prefers-color-scheme: light) {

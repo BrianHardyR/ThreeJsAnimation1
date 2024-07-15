@@ -105,13 +105,13 @@ export class Scene_3 extends Scene {
     }
 
     helper() {
-        const asixHelper = new THREE.AxesHelper(50)
-        this.scene.add(asixHelper)
+        // const asixHelper = new THREE.AxesHelper(50)
+        // this.scene.add(asixHelper)
     }
 
     setupCamera() {
         super.setupCamera()
-        this.camera.position.z = 15
+        this.camera.position.z = 20
     }
 
     setupVisualizer() {
