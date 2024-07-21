@@ -46,32 +46,40 @@ export class Scene_3 extends Scene {
             <button id="play-pause">Play </button
             <label id="load_progress"><progress value="0" max="100">70 %</progress></label>
             <!-- Upload File only accept mp3-->
-            <!-- <input type="file" id="file" accept="audio/mp3"> -->
+            <input type="file" id="file" accept="audio/*">
         `
         this.audioControls.playPauseButton = document.querySelector('#play-pause')
         this.audioControls.progressBar = document.querySelector('progress')
         // Upload file
-        // this.audioControls.uploadFile = document.querySelector('#file')
-        // this.audioControls.uploadFile.addEventListener('change', (e) => {
-            
-        // })
+        this.audioControls.uploadFile = document.querySelector('#file')
+        this.audioControls.uploadFile.addEventListener('change', (e) => {
+            this.loadBuffer(e.target.files[0])
+        })
 
         this.audioControls.playPauseButton.addEventListener('click', () => {
             if (this.audio.isPlaying) {
-                this.audio.pause()
-                // reset uniforms
-                this.uniforms.u_frequency_low.value = 0.0
-                this.uniforms.u_frequency_mid.value = 0.0
-                this.uniforms.u_frequency_high.value = 0.0
-                this.u_time = 0.0
-
-                this.audioControls.playPauseButton.textContent = 'Play '
+                this.pause()
             } else {
-                this.audio.play()
-                this.audioControls.playPauseButton.textContent = 'Pause'
+                this.play()
             }
         })
 
+    }
+
+    pause() {
+        this.audio.pause()
+        // reset uniforms
+        this.uniforms.u_frequency_low.value = 0.0
+        this.uniforms.u_frequency_mid.value = 0.0
+        this.uniforms.u_frequency_high.value = 0.0
+        this.u_time = 0.0
+
+        this.audioControls.playPauseButton.textContent = 'Play '
+    }
+
+    play() {
+        this.audio.play()
+        this.audioControls.playPauseButton.textContent = 'Pause'
     }
 
     removePlayerControls() {
@@ -79,15 +87,27 @@ export class Scene_3 extends Scene {
     }
 
     loadBuffer(trackFileData) {
+        console.log(trackFileData)
+        this.pause()
         this.audio.stop()
-        this.audioControls.playPauseButton.textContent = 'Play'
+        const reader = new FileReader()
         const context = this.audio.context
-        context.decodeAudioData(trackFileData, (buffer) => {
-            this.audio.setBuffer(buffer)
-            this.audio.setLoop(true)
-            this.audio.setVolume(0.5)
-            this.audio.play()
-        })
+        reader.onprogress = (e) => {
+            if (e.lengthComputable) {
+                console.log(e.loaded / e.total)
+                this.audioControls.progressBar.value = (e.loaded / e.total) * 100
+            }
+        }
+        reader.onload = (e) => {
+            const byteBuffer = e.target.result
+            context.decodeAudioData(byteBuffer, (buffer) => {
+                this.audio.setBuffer(buffer)
+                this.audio.setLoop(true)
+                this.audio.setVolume(0.5)
+                this.play()
+            })
+        }
+        reader.readAsArrayBuffer(trackFileData,)
     }
 
     /**
