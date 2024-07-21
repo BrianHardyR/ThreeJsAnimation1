@@ -46,7 +46,7 @@ export class Scene_3 extends Scene {
             <button id="play-pause">Play </button
             <label id="load_progress"><progress value="0" max="100">70 %</progress></label>
             <!-- Upload File only accept mp3-->
-            <input type="file" id="file" accept="audio/*">
+            <input type="file" id="file" accept=".mp3,audio/*">
         `
         this.audioControls.playPauseButton = document.querySelector('#play-pause')
         this.audioControls.progressBar = document.querySelector('progress')
