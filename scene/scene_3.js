@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { Scene } from './scene.js';
-import vertexShader from './vertexShader.glsl';
-import fragmentShader from './fragmentShader.glsl';
+import vertexShader from './scene3_shaders/vertexShader.glsl';
+import fragmentShader from './scene3_shaders/fragmentShader.glsl';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 
 export class Scene_3 extends Scene {
@@ -164,7 +164,6 @@ export class Scene_3 extends Scene {
             uniforms: this.uniforms,
             vertexShader: vertexShader,
             fragmentShader: fragmentShader,
-
         })
         material.wireframe = true
         // material.transparent = true

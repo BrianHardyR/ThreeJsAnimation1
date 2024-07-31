@@ -1,8 +1,9 @@
 import './style.css'
 import * as THREE from 'three'
-import { Scene_1 } from './scene_1.js'
-import { Scene_2 } from './scene_2.js'
-import { Scene_3 } from './scene_3.js'
+import { Scene_1 } from './scene/scene_1.js'
+import { Scene_2 } from './scene/scene_2.js'
+import { Scene_3 } from './scene/scene_3.js'
+import { Scene_4 } from './scene/scene_4.js'
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -13,6 +14,7 @@ document.querySelector('#app').innerHTML = `
         <button id="scene2">Scene 2</button>
         <button id="scene3">Scene 3</button>
         <div id="player"></div>
+        <button id="scene4">Scene 4</button>
     </div>
     
   </div>
@@ -38,22 +40,25 @@ function updateScene(scene) {
     renderer.render(scene.getScene(), scene.getCamera())
 }
 
-updateScene(new Scene_3(renderer))
+updateScene(new Scene_4(renderer))
 
 
 // Switch scenes
 document.getElementById('scene1').addEventListener('click', () => {
     updateScene(new Scene_1(renderer))
-})
+});
 
 document.getElementById('scene2').addEventListener('click', () => {
     updateScene(new Scene_2(renderer))
-})
+});
 
 document.getElementById('scene3').addEventListener('click', () => {
     updateScene(new Scene_3(renderer))
-})
+});
 
+document.getElementById('scene4').addEventListener('click', () => {
+    updateScene(new Scene_4(renderer))
+});
 
 
 

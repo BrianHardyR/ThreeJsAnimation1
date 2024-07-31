@@ -1,9 +1,13 @@
 import * as THREE from 'three'
+import { EffectComposer } from 'three/examples/jsm/Addons.js'
+import { UnrealBloomPass } from 'three/examples/jsm/Addons.js'
+
 export class Scene {
 
     camera
     renderer
     scene
+    composer
 
     constructor(renderer) {
         // type guard for renderer
@@ -45,7 +49,12 @@ export class Scene {
         // 
     }
 
-    
+    addPass(pass){
+        if(!this.composer){
+            this.composer = new EffectComposer(this.renderer, new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight))
+        }
+        this.composer.addPass(pass)
+    }
 
     resize(width, height) {
         // type guard for width and height as numbers
