@@ -7,7 +7,7 @@ import centerSphereVertexShader from './scene4_shaders/c_s_vertex_shader.glsl';
 import centerSpereFragmentShader from './scene4_shaders/c_s_frag_shader.glsl';
 
 // gui
-import * as dat from 'dat.gui';
+// import * as dat from 'dat.gui';
 
 const displacementMapPars = /* glsl */ `#include <displacementmap_pars_vertex>`
 const displacementMapMain = /* glsl */ `#include <displacementmap_vertex>`
@@ -51,12 +51,12 @@ export class Scene_4 extends Scene {
         this.camera.position.set(-22, 0, 0)
 
         // gui
-        this.gui = new dat.GUI()
+        // this.gui = new dat.GUI()
         //gui camera folder
-        const cameraFolder = this.gui.addFolder('Camera')
-        cameraFolder.add(this.camera.position, 'x', -100, 100).name('x')
-        cameraFolder.add(this.camera.position, 'y', -100, 100).name('y')
-        cameraFolder.add(this.camera.position, 'z', -100, 100).name('z')
+        // const cameraFolder = this.gui.addFolder('Camera')
+        // cameraFolder.add(this.camera.position, 'x', -100, 100).name('x')
+        // cameraFolder.add(this.camera.position, 'y', -100, 100).name('y')
+        // cameraFolder.add(this.camera.position, 'z', -100, 100).name('z')
 
         // this.uniforms.u_texture.value = new THREE.TextureLoader().load('image.jpg')
         // console.log(this.uniforms.u_texture)
@@ -90,15 +90,15 @@ export class Scene_4 extends Scene {
         pointLight.lookAt(new THREE.Vector3(0,0,0))
         pointLight.position.set(-10,10,-10)
         this.scene.add(pointLight)
-        const pointLightHelper = new THREE.PointLightHelper(pointLight)
-        this.scene.add(pointLightHelper)
+        // const pointLightHelper = new THREE.PointLightHelper(pointLight)
+        // this.scene.add(pointLightHelper)
 
         const pointLight2 = new THREE.PointLight(0xffffff, 100)
         pointLight2.lookAt(new THREE.Vector3(0,0,0))
         pointLight2.position.set(-15,-0,0)
         this.scene.add(pointLight2)
-        const pointLightHelper2 = new THREE.PointLightHelper(pointLight2)
-        this.scene.add(pointLightHelper2)
+        // const pointLightHelper2 = new THREE.PointLightHelper(pointLight2)
+        // this.scene.add(pointLightHelper2)
 
     }
 
