@@ -23,8 +23,6 @@ export class Scene_4 extends Scene {
     topPlane
     bottomPlane
     centerSphere
-    noise2d
-    noise3d
 
     centerSpereVertexShaderPars
     centerSpereVertexShaderMain
@@ -86,7 +84,7 @@ export class Scene_4 extends Scene {
         // const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
         // this.scene.add(ambientLight)
 
-        const pointLight = new THREE.DirectionalLight(0xffffff, 1.)
+        const pointLight = new THREE.PointLight(0xffffff, 100)
         pointLight.lookAt(new THREE.Vector3(0,0,0))
         pointLight.position.set(-10,10,-10)
         this.scene.add(pointLight)
@@ -95,7 +93,7 @@ export class Scene_4 extends Scene {
 
         const pointLight2 = new THREE.PointLight(0xffffff, 100)
         pointLight2.lookAt(new THREE.Vector3(0,0,0))
-        pointLight2.position.set(-15,-0,0)
+        pointLight2.position.set(-15,-5,5)
         this.scene.add(pointLight2)
         // const pointLightHelper2 = new THREE.PointLightHelper(pointLight2)
         // this.scene.add(pointLightHelper2)
