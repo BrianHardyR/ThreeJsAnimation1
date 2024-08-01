@@ -176,6 +176,7 @@ export class Scene_3 extends Scene {
     }
 
     animate(elapsedTime) {
+        super.animate(elapsedTime)
         this.controls.update()
         this.uniforms.u_time.value = elapsedTime
         

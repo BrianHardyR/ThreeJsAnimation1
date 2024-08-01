@@ -90,6 +90,7 @@ export class Scene_1 extends Scene {
     }
 
     animate(elapsedTime) {
+        super.animate(elapsedTime)
         this.controls.update()
         // Do not call renderer here
         this.cube.rotation.y = Math.sin(elapsedTime * 0.2)

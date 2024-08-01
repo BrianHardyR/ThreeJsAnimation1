@@ -47,6 +47,7 @@ export class Scene_2 extends Scene {
     }
 
     animate(elapsedTime) {
+        super.animate(elapsedTime)
         // Update Particles
         this.particles.rotation.y = Math.sin(elapsedTime * 0.2) * 0.4
         this.particles.rotation.x = Math.cos(elapsedTime * 0.2) * 0.4

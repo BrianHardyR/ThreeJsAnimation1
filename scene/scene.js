@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { EffectComposer } from 'three/examples/jsm/Addons.js'
-import { UnrealBloomPass } from 'three/examples/jsm/Addons.js'
+import { RenderPass } from 'three/examples/jsm/Addons.js'
+import { OutputPass } from 'three/examples/jsm/Addons.js'
 
 export class Scene {
 
@@ -9,15 +10,18 @@ export class Scene {
     scene
     composer
 
+    isOutPutPassSet = false
+
     constructor(renderer) {
         // type guard for renderer
         if (!(renderer instanceof THREE.WebGLRenderer)) {
             throw new Error('Scene constructor expects a THREE.WebGLRenderer as an argument');
         }
         this.renderer = renderer;
+
         this.scene = new THREE.Scene();
-        this.setupRenderer();
         this.setupCamera();
+        this.setupRenderer();
     }
 
     setupCamera() {
@@ -29,6 +33,18 @@ export class Scene {
     setupRenderer() {
         // 
         this.renderer.setClearColor(0x000000, 1)
+        this.renderer.setPixelRatio(window.devicePixelRatio)
+        this.renderer.toneMapping = THREE.ReinhardToneMapping
+        this.renderer.shadowMap.enabled = true
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
+        // composer
+        const target = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight, {
+            samples: 8
+        })
+        this.renderer.toneMappingExposure = 1
+        this.composer = new EffectComposer(this.renderer, target)
+        const renderPass = new RenderPass(this.scene, this.camera)
+        this.composer.addPass(renderPass)
     }
 
     getCamera() {
@@ -45,13 +61,24 @@ export class Scene {
         // 
     }
 
-    animate() {
-        // 
+    setOutputPass() {
+        this.addPass(new OutputPass())
     }
 
-    addPass(pass){
-        if(!this.composer){
-            this.composer = new EffectComposer(this.renderer, new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight))
+    animate(elapsedTime) {
+        // if(this.isOutPutPassSet){
+        //     this.setOutputPass()
+        // }
+        this.composer.render()
+    }
+
+    addPass(pass) {
+        //
+        if (pass instanceof OutputPass && this.isOutPutPassSet) {
+            throw new Error('OutputPass already set')
+        }
+        if (pass instanceof OutputPass) {
+            this.isOutPutPassSet = true
         }
         this.composer.addPass(pass)
     }
@@ -63,6 +90,8 @@ export class Scene {
         }
         this.getCamera().aspect = width / height
         this.getCamera().updateProjectionMatrix()
+        this.renderer.setSize(width, height)
+        this.composer.setSize(width, height)
     }
 
 }

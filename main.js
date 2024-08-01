@@ -27,7 +27,6 @@ const canvas = document.querySelector('canvas.webgl')
 // Renderer
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true })
 renderer.setSize(window.innerWidth, window.innerHeight)
-renderer.shadowMap.enabled = true
 
 // Orbit controls
 let currentScene = null
@@ -37,7 +36,6 @@ function updateScene(scene) {
         currentScene.finalize()
     }
     currentScene = scene
-    renderer.render(scene.getScene(), scene.getCamera())
 }
 
 updateScene(new Scene_4(renderer))
@@ -76,7 +74,6 @@ function animate() {
     if (!currentScene) return
     const elapsedTime = clock.getElapsedTime()
     currentScene.animate(elapsedTime)
-    renderer.render(currentScene.getScene(), currentScene.getCamera())
 }
 
 renderer.setAnimationLoop(animate);
